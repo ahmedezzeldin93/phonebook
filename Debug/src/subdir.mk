@@ -4,13 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/PhoneBook.cpp 
+../src/PhoneBook.cpp \
+../src/PhoneEntry.cpp \
+../src/main.cpp 
 
 OBJS += \
-./src/PhoneBook.o 
+./src/PhoneBook.o \
+./src/PhoneEntry.o \
+./src/main.o 
 
 CPP_DEPS += \
-./src/PhoneBook.d 
+./src/PhoneBook.d \
+./src/PhoneEntry.d \
+./src/main.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

@@ -7,9 +7,6 @@
 //============================================================================
 
 #include <iostream>
-using namespace std;
+#include "PhoneBook.h"
 
-int main() {
-	cout << "Hello This is My PhoneBook" << endl; // prints Hello This is My PhoneBook
-	return 0;
-}
+using namespace std;
