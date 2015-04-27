@@ -54,3 +54,35 @@ PhoneEntry::PhoneEntry(string forename, string surname, string email, string pho
 	next = NULL;
 	previous = NULL;
 }
+
+const string& PhoneEntry::getEmail() const {
+	return email;
+}
+
+void PhoneEntry::setEmail(const string& email) {
+	this->email = email;
+}
+
+const string& PhoneEntry::getForename() const {
+	return forename;
+}
+
+void PhoneEntry::setForename(const string& forename) {
+	this->forename = forename;
+}
+
+const string& PhoneEntry::getPhoneNumber() const {
+	return phone_number;
+}
+
+void PhoneEntry::setPhoneNumber(const string& phoneNumber) {
+	phone_number = phoneNumber;
+}
+
+const string& PhoneEntry::getSurname() const {
+	return surname;
+}
+
+void PhoneEntry::setSurname(const string& surname) {
+	this->surname = surname;
+}

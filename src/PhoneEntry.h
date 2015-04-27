@@ -29,6 +29,15 @@ public:
 	PhoneEntry(string forename, string surname, string email);
 	PhoneEntry(string forename, string surname, string email, string phone_number);
 
+	const string& getEmail() const;
+	void setEmail(const string& email);
+	const string& getForename() const;
+	void setForename(const string& forename);
+	const string& getPhoneNumber() const;
+	void setPhoneNumber(const string& phoneNumber);
+	const string& getSurname() const;
+	void setSurname(const string& surname);
+
 	friend class PhoneBook;
 };
 
