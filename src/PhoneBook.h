@@ -20,8 +20,8 @@ private:
 
 public:
 	PhoneBook();
-	void  add_entry(PhoneEntry phone_entry);
-	void delete_entry(PhoneEntry phone_entry);
+	void  add_entry(PhoneEntry *phone_entry);
+	void delete_entry(PhoneEntry *phone_entry);
 	PhoneEntry search_by_name(string name);
 	PhoneEntry search_by_number(string number);
 	void sort_by_name();
