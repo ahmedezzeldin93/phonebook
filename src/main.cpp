@@ -10,7 +10,34 @@
 
 using namespace std;
 
+void welcome(){
+	cout << "Hello This is My PhoneBook!!" << endl << "-- MENU --" << endl;
+	cout << "1. to add new entry." << endl;
+	cout << "2. to delete existing entry." << endl;
+	cout << "3. to search by name." << endl;
+	cout << "4. to search by number." << endl;
+	cout << "5. to sort by name." << endl;
+	cout << "6. to sort by number." << endl;
+	cout << "Choose: ";
+}
+
 int main() {
-	cout << "Hello This is My PhoneBook!!" << endl;
+	int enteredValue;
+		welcome();
+		cin >> enteredValue;
+		switch(enteredValue){
+				case 1:
+				break;
+				case 2:
+				break;
+				case 3:
+				break;
+				case 4:
+				break;
+				case 5:
+				break;
+				case 6:
+				break;
+			}
 	return 0;
 }
