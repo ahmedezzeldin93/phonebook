@@ -8,5 +8,6 @@
 
 #include <iostream>
 #include "PhoneBook.h"
+#include "PhoneEntry.h"
 
 using namespace std;

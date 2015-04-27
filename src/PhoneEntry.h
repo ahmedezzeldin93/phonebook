@@ -24,6 +24,10 @@ public:
 	PhoneEntry *previous;
 
 	PhoneEntry();
+	PhoneEntry(string forename);
+	PhoneEntry(string forename, string surname);
+	PhoneEntry(string forename, string surname, string email);
+	PhoneEntry(string forename, string surname, string email, string phone_number);
 
 	friend class PhoneBook;
 };
