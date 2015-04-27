@@ -16,3 +16,8 @@ PhoneBook::PhoneBook() {
 	head = NULL;
 	tail = NULL;
 }
+
+void PhoneBook::add_entry(PhoneEntry *phone_entry){
+	phone_entry->next = head;
+	head = phone_entry;
+}

@@ -21,13 +21,46 @@ void welcome(){
 	cout << "Choose: ";
 }
 
+void add_new_entry(){
+	string forename;
+	string surname;
+	string email;
+	string phone_number;
+	PhoneBook *phone_book = new PhoneBook();
+	string temp_answer ;
+	do{
+		cout << "Do you want to create a new phone entry? (y/n) " << endl;
+		cin >> temp_answer;
+		if (temp_answer == "n"){
+			cout << "Byebye " << endl;
+			return;
+		}
+        PhoneEntry *phone_entry = new PhoneEntry();
+        cout << "Please enter your forename: " << endl;
+        cin>>forename;
+        cout << "Please enter your surname: " << endl;
+        cin>>surname;
+        cout << "Please enter your email: " << endl;
+        cin>>email;
+        cout << "Please enter your phone number: " << endl;
+        cin>>phone_number;
+        phone_entry->setForename(forename);
+        phone_entry->setSurname(surname);
+        phone_entry->setEmail(email);
+        phone_entry->setPhoneNumber(phone_number);
+        phone_book->add_entry(phone_entry);
+    	}while (temp_answer=="y");
+	}
+
+
 int main() {
 	int enteredValue;
 		welcome();
 		cin >> enteredValue;
 		switch(enteredValue){
 				case 1:
-				break;
+					add_new_entry();
+					break;
 				case 2:
 				break;
 				case 3:
