@@ -11,3 +11,8 @@
 #include "PhoneEntry.h"
 
 using namespace std;
+
+PhoneBook::PhoneBook() {
+	head = NULL;
+	tail = NULL;
+}

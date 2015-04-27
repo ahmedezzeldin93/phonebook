@@ -5,6 +5,8 @@
  *      Author: ahmed
  */
 #include<iostream>
+#include "PhoneEntry.h"
+#include "PhoneBook.h"
 
 using namespace std;
 
