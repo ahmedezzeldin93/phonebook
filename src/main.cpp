@@ -21,12 +21,11 @@ void welcome(){
 	cout << "Choose: ";
 }
 
-void add_new_entry(){
+void add_new_entry(PhoneBook *phone_book){
 	string forename;
 	string surname;
 	string email;
 	string phone_number;
-	PhoneBook *phone_book = new PhoneBook();
 	string temp_answer ;
 	do{
 		cout << "Do you want to create a new phone entry? (y/n) " << endl;
@@ -52,21 +51,55 @@ void add_new_entry(){
     	}while (temp_answer=="y");
 	}
 
+void search_by_name(PhoneBook *phone_book){
+	string temp_answer;
+	string name_to_search;
+	do {
+		cout << "Enter the number you want to search your Phone Book: ";
+		cin >> name_to_search;
+		phone_book->search_by_name(name_to_search);
+		cout << "Do you want to search for another number ? (y/n) ";
+		cin >> temp_answer;
+		if (temp_answer == "n"){
+			cout << "Byebye " << endl;
+			return;
+		}
+	}while (temp_answer=="y");
+}
+
+void search_by_number(PhoneBook *phone_book){
+	string temp_answer;
+	string number_to_search;
+	do {
+		cout << "Enter the number you want to search your Phone Book: ";
+		cin >> number_to_search;
+		phone_book->search_by_number(number_to_search);
+		cout << "Do you want to search for another number ? (y/n) ";
+		cin >> temp_answer;
+		if (temp_answer == "n"){
+			cout << "Byebye " << endl;
+			return;
+		}
+	}while (temp_answer=="y");
+}
 
 int main() {
 	int enteredValue;
+		PhoneBook *phone_book = new PhoneBook();
 		welcome();
 		cin >> enteredValue;
 		switch(enteredValue){
 				case 1:
-					add_new_entry();
+					add_new_entry(phone_book);
 					break;
 				case 2:
 				break;
 				case 3:
-				break;
+					search_by_name(phone_book);
+					break;
 				case 4:
-				break;
+					search_by_number(phone_book);
+					break;
 				case 5:
 				break;
 				case 6:
