@@ -15,12 +15,9 @@ using namespace std;
 
 class PhoneBook{
 
-
-private:
+public:
 	PhoneEntry *head;
 	PhoneEntry *tail;
-
-public:
 
 	PhoneBook();
 	void print_all();
@@ -29,11 +26,21 @@ public:
 	void delete_entry(PhoneEntry *phone_entry);
 	PhoneEntry* search_by_name(string name);
 	PhoneEntry* search_by_number(string number);
-	void sort_by_name();
+
+	PhoneEntry* SortedMerge(PhoneEntry* a, PhoneEntry* b);
+	void FrontBackSplit(PhoneEntry* source, PhoneEntry** frontRef, PhoneEntry** backRef);
+	void MergeSort(PhoneEntry** headRef);
+
+	void sort_by_name(PhoneEntry** h);
 	void sort_by_number();
+
 
 	Iterator begin();
 	Iterator end();
+	const PhoneEntry*& getHead() const;
+	void setHead(const PhoneEntry*& head);
+	const PhoneEntry*& getTail() const;
+	void setTail(const PhoneEntry*& tail);
 };
 
 

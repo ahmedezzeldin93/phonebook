@@ -94,3 +94,88 @@ PhoneEntry* PhoneBook::search_by_number(string number){
 	cout << "Not found" << endl;
 	return NULL;
 }
+
+PhoneEntry* PhoneBook::SortedMerge(PhoneEntry* a, PhoneEntry* b)
+{
+  PhoneEntry* result = NULL;
+
+  /* Base cases */
+  if (a == NULL)
+     return(b);
+  else if (b==NULL)
+     return(a);
+
+  /* Pick either a or b, and recur */
+  if (a->getFullname() <= b->getFullname())
+  {
+     result = a;
+     result->next = SortedMerge(a->next, b);
+  }
+  else
+  {
+     result = b;
+     result->next = SortedMerge(a, b->next);
+  }
+  return(result);
+}
+
+void PhoneBook::FrontBackSplit(PhoneEntry* source, PhoneEntry** frontRef, PhoneEntry** backRef)
+{
+  PhoneEntry* fast;
+  PhoneEntry* slow;
+  if (source==NULL || source->next==NULL)
+  {
+    /* length < 2 cases */
+    *frontRef = source;  //&a
+    *backRef = NULL;	 //&b
+  }
+  else
+  {
+    slow = source;
+    fast = source->next;
+
+    /* Advance 'fast' two nodes, and advance 'slow' one node */
+    while (fast != NULL)
+    {
+      fast = fast->next;
+      if (fast != NULL)
+      {
+        slow = slow->next;
+        fast = fast->next;
+      }
+    }
+
+    /* 'slow' is before the midpoint in the list, so split it in two
+      at that point. */
+    *frontRef = source;
+    *backRef = slow->next;
+    slow->next = NULL;
+  }
+}
+
+void PhoneBook::MergeSort(PhoneEntry** headRef)
+{
+  PhoneEntry* head = *headRef;
+  PhoneEntry* a;
+  PhoneEntry* b;
+
+  /* Base case -- length 0 or 1 */
+  if ((head == NULL) || (head->next == NULL))
+  {
+    return;
+  }
+
+  /* Split head into 'a' and 'b' sublists */
+  FrontBackSplit(head, &a, &b);
+
+  /* Recursively sort the sublists */
+  MergeSort(&a);
+  MergeSort(&b);
+
+  /* answer = merge the two sorted lists together */
+  *headRef = SortedMerge(a, b);
+}
+
+void PhoneBook::sort_by_name(PhoneEntry **h){
+	this->MergeSort(h);
+}

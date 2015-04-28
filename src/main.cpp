@@ -116,6 +116,11 @@ void save_phonebook(PhoneBook *phone_book){
 	phone_book->print_all_entries();
 }
 
+void sort_by_name(PhoneBook *phone_book){
+	PhoneEntry *phone_entry;
+	phone_book->sort_by_name(&phone_entry);
+}
+
 int main() {
 	int enteredValue;
 		PhoneBook *phone_book = new PhoneBook();
@@ -136,6 +141,7 @@ int main() {
 						search_by_number(phone_book);
 						break;
 					case 5:
+						sort_by_name(phone_book);
 						break;
 					case 6:
 						break;
