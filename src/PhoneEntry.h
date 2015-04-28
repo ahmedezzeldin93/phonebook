@@ -13,13 +13,14 @@ using namespace std;
 
 class PhoneEntry{
 
-public:
 
+private:
 	string forename;
 	string surname;
 	string email;
 	string phone_number;
 
+public:
 	PhoneEntry *next;
 	PhoneEntry *previous;
 
@@ -37,8 +38,11 @@ public:
 	void setPhoneNumber(const string& phoneNumber);
 	const string& getSurname() const;
 	void setSurname(const string& surname);
+	string getFullname();
+	void print_entry();
 
 	friend class PhoneBook;
+	friend class Iterator;
 };
 
 

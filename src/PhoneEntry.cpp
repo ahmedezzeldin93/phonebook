@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <iomanip>
 #include "PhoneEntry.h"
 
 using namespace std;
@@ -85,4 +86,16 @@ const string& PhoneEntry::getSurname() const {
 
 void PhoneEntry::setSurname(const string& surname) {
 	this->surname = surname;
+}
+
+string PhoneEntry::getFullname(){
+	return this->getForename() + " " + this->getSurname();
+}
+
+void PhoneEntry::print_entry(){
+	cout << setfill('-') << setw(25) << "-" << endl;
+	cout << "Name: " << this->getFullname() << endl;
+	cout << "Number :" << this->getPhoneNumber() << endl;
+	cout << "Email: " << this->getEmail() << endl;
+	cout << setfill('-') << setw(25) << "-" << endl;
 }

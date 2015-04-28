@@ -4,16 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/Iterator.cpp \
 ../src/PhoneBook.cpp \
 ../src/PhoneEntry.cpp \
 ../src/main.cpp 
 
 OBJS += \
+./src/Iterator.o \
 ./src/PhoneBook.o \
 ./src/PhoneEntry.o \
 ./src/main.o 
 
 CPP_DEPS += \
+./src/Iterator.d \
 ./src/PhoneBook.d \
 ./src/PhoneEntry.d \
 ./src/main.d 
