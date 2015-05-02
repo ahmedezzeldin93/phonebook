@@ -163,7 +163,10 @@ int main() {
 						phone_book->print_all();
 						break;
 					case 8:
-						cout << "Your PhoneBook have" << phone_book->count << endl;
+						cout << "Your PhoneBook contains " << phone_book->count << " entry" << endl;
+						cout << setfill('-') << setw(25) << "-" << endl;
+						cout << "Back to Menu" << endl;
+						cout << setfill('-') << setw(25) << "-" << endl;
 						break;
 					case 9:
 						break;
