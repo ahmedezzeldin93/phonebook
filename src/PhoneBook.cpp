@@ -10,6 +10,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <string>
 #include "PhoneBook.h"
 #include "PhoneEntry.h"
 #include "Iterator.h"
@@ -22,19 +23,36 @@ PhoneBook::PhoneBook() {
 	head->next = tail;
 	tail->previous = head;
 	head->previous = NULL;
+	count=0;
 }
+
+/*
+PhoneBook::PhoneBook(PhoneEntry *phone_entry) {
+	head = phone_entry;
+	head->previous = NULL;
+	tail = new PhoneEntry;
+	Iterator pos;
+		pos = this->begin();
+		for(; !pos.equals(this->end()); pos.operator ++()){
+			tail->next;
+		}
+}
+*/
+
 
 void PhoneBook::add_entry(PhoneEntry *phone_entry){
 	phone_entry->previous =tail->previous;
 	phone_entry->next = tail;
 	tail->previous-> next = phone_entry;
 	tail->previous = phone_entry;
+	count++;
 }
 
 void PhoneBook::delete_entry(PhoneEntry *phone_entry){
 	phone_entry->previous->next = phone_entry->next;
 	phone_entry->next->previous = phone_entry->previous;
 	delete phone_entry;
+	count--;
 }
 
 Iterator PhoneBook::begin(){
@@ -60,7 +78,7 @@ void PhoneBook::print_all(){
 }
 
 void PhoneBook::print_all_entries(){
-	ofstream outFile("/home/ahmed/phonebook.txt", ios::out);
+	ofstream outFile("phonebook.txt", ios::out);
 	Iterator pos;
 	pos = this->begin();
 	for(; !pos.equals(this->end()); pos.operator ++()){
@@ -95,87 +113,67 @@ PhoneEntry* PhoneBook::search_by_number(string number){
 	return NULL;
 }
 
-PhoneEntry* PhoneBook::SortedMerge(PhoneEntry* a, PhoneEntry* b)
+PhoneEntry* PhoneBook::merge(PhoneEntry *first, PhoneEntry *second)
 {
-  PhoneEntry* result = NULL;
+    // If first linked list is empty
+    if (!first)
+        return second;
 
-  /* Base cases */
-  if (a == NULL)
-     return(b);
-  else if (b==NULL)
-     return(a);
+    // If second linked list is empty
+    if (!second)
+        return first;
 
-  /* Pick either a or b, and recur */
-  if (a->getFullname() <= b->getFullname())
-  {
-     result = a;
-     result->next = SortedMerge(a->next, b);
-  }
-  else
-  {
-     result = b;
-     result->next = SortedMerge(a, b->next);
-  }
-  return(result);
-}
-
-void PhoneBook::FrontBackSplit(PhoneEntry* source, PhoneEntry** frontRef, PhoneEntry** backRef)
-{
-  PhoneEntry* fast;
-  PhoneEntry* slow;
-  if (source==NULL || source->next==NULL)
-  {
-    /* length < 2 cases */
-    *frontRef = source;  //&a
-    *backRef = NULL;	 //&b
-  }
-  else
-  {
-    slow = source;
-    fast = source->next;
-
-    /* Advance 'fast' two nodes, and advance 'slow' one node */
-    while (fast != NULL)
+    // Pick the smaller value
+    if (first->getPhoneNumber() < second->getPhoneNumber())
     {
-      fast = fast->next;
-      if (fast != NULL)
-      {
-        slow = slow->next;
-        fast = fast->next;
-      }
+        first->next = merge(first->next,second);
+        first->next->previous = first;
+        first->previous = NULL;
+        return first;
     }
-
-    /* 'slow' is before the midpoint in the list, so split it in two
-      at that point. */
-    *frontRef = source;
-    *backRef = slow->next;
-    slow->next = NULL;
-  }
+    else
+    {
+        second->next = merge(first,second->next);
+        second->next->previous = second;
+        second->previous= NULL;
+        return second;
+    }
 }
 
-void PhoneBook::MergeSort(PhoneEntry** headRef)
+void swap(int *A, int *B)
 {
-  PhoneEntry* head = *headRef;
-  PhoneEntry* a;
-  PhoneEntry* b;
-
-  /* Base case -- length 0 or 1 */
-  if ((head == NULL) || (head->next == NULL))
-  {
-    return;
-  }
-
-  /* Split head into 'a' and 'b' sublists */
-  FrontBackSplit(head, &a, &b);
-
-  /* Recursively sort the sublists */
-  MergeSort(&a);
-  MergeSort(&b);
-
-  /* answer = merge the two sorted lists together */
-  *headRef = SortedMerge(a, b);
+    int temp = *A;
+    *A = *B;
+    *B = temp;
 }
 
-void PhoneBook::sort_by_name(PhoneEntry **h){
-	this->MergeSort(h);
+PhoneEntry *PhoneBook::split(PhoneEntry *head)
+{
+    PhoneEntry *fast = head,*slow = head;
+    while (fast->next && fast->next->next)
+    {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    PhoneEntry *temp = slow->next;
+    slow->next = NULL;
+    return temp;
+}
+
+PhoneEntry* PhoneBook::MergeSort(PhoneEntry* head)
+{
+  if (!head || !head->next)
+        return head;
+    PhoneEntry *second = split(head);
+
+    // Recur for left and right halves
+    head = MergeSort(head);
+    second = MergeSort(second);
+
+    // Merge the two sorted halves
+    return merge(head,second);
+}
+
+PhoneEntry* PhoneBook::sort_by_number(PhoneEntry* h){
+	return this->MergeSort(h);
 }

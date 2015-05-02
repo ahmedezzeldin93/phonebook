@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <string>
 #include "PhoneEntry.h"
 #include "PhoneBook.h"
 #include "Iterator.h"
@@ -14,7 +15,6 @@
 using namespace std;
 
 void welcome(){
-	cout << setfill('-') << setw(25) << "-" << endl;
 	cout << "This is My PhoneBook!!" << endl << "-- MENU --" << endl;
 	cout << "1. to add new entry." << endl;
 	cout << "2. to delete existing entry." << endl;
@@ -34,12 +34,14 @@ void add_new_entry(PhoneBook *phone_book){
 	string surname;
 	string email;
 	string phone_number;
-	string temp_answer ;
+	string temp_answer = "";
 	do{
 		cout << "Do you want to create a new phone entry? (y/n) ";
 		cin >> temp_answer;
 		if (temp_answer == "n"){
+			cout << setfill('-') << setw(25) << "-" << endl;
 			cout << "Back to Menu" << endl;
+			cout << setfill('-') << setw(25) << "-" << endl;
 			return;
 		}
         PhoneEntry *phone_entry = new PhoneEntry();
@@ -70,6 +72,7 @@ void search_by_name(PhoneBook *phone_book){
 		cout << "Do you want to search for another number ? (y/n) ";
 		cin >> temp_answer;
 		if (temp_answer == "n"){
+			cout << setfill('-') << setw(25) << "-" << endl;
 			cout << "Back to Menu" << endl;
 			cout << setfill('-') << setw(25) << "-" << endl;
 			return;
@@ -87,6 +90,7 @@ void search_by_number(PhoneBook *phone_book){
 		cout << "Do you want to search for another number ? (y/n) ";
 		cin >> temp_answer;
 		if (temp_answer == "n"){
+			cout << setfill('-') << setw(25) << "-" << endl;
 			cout << "Back to Menu" << endl;
 			cout << setfill('-') << setw(25) << "-" << endl;
 			return;
@@ -113,12 +117,21 @@ void delete_entry(PhoneBook *phone_book){
 }
 
 void save_phonebook(PhoneBook *phone_book){
+	/*
+	string destination = "";
+	cout << "Enter the file destination precisely: ";
+	cin >> destination;
+	const char *destinationChar = destination.c_str();
+	*/
 	phone_book->print_all_entries();
 }
 
-void sort_by_name(PhoneBook *phone_book){
-	PhoneEntry *phone_entry;
-	phone_book->sort_by_name(&phone_entry);
+void sort_by_number(PhoneBook *phone_book){
+	PhoneEntry *globalHead = NULL;
+	globalHead = phone_book->sort_by_number(globalHead);
+	cout << globalHead;
+	//phone_book->print_all();
+	globalHead->print(globalHead);
 }
 
 int main() {
@@ -141,14 +154,16 @@ int main() {
 						search_by_number(phone_book);
 						break;
 					case 5:
-						sort_by_name(phone_book);
+						//sort_by_name(phone_book);
 						break;
 					case 6:
+						sort_by_number(phone_book);
 						break;
 					case 7:
 						phone_book->print_all();
 						break;
 					case 8:
+						cout << "Your PhoneBook have" << phone_book->count << endl;
 						break;
 					case 9:
 						break;

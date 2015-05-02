@@ -18,21 +18,27 @@ class PhoneBook{
 public:
 	PhoneEntry *head;
 	PhoneEntry *tail;
+	int count;
+
 
 	PhoneBook();
+	PhoneBook(PhoneEntry *phone_entry);
 	void print_all();
+	void print_all(PhoneEntry *phone_entry);
 	void print_all_entries();
 	void add_entry(PhoneEntry *phone_entry);
 	void delete_entry(PhoneEntry *phone_entry);
 	PhoneEntry* search_by_name(string name);
 	PhoneEntry* search_by_number(string number);
 
-	PhoneEntry* SortedMerge(PhoneEntry* a, PhoneEntry* b);
-	void FrontBackSplit(PhoneEntry* source, PhoneEntry** frontRef, PhoneEntry** backRef);
-	void MergeSort(PhoneEntry** headRef);
+	PhoneEntry* merge(PhoneEntry *first, PhoneEntry *second);
+	void swap(int *A, int *B);
+	PhoneEntry* split(PhoneEntry *head);
+	PhoneEntry* MergeSort(PhoneEntry* head);
 
-	void sort_by_name(PhoneEntry** h);
-	void sort_by_number();
+
+	PhoneEntry* sort_by_name(PhoneEntry* h);
+	PhoneEntry* sort_by_number(PhoneEntry* h);
 
 
 	Iterator begin();

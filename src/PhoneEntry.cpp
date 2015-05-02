@@ -99,3 +99,15 @@ void PhoneEntry::print_entry(){
 	cout << "Email: " << this->getEmail() << endl;
 	cout << setfill('-') << setw(25) << "-" << endl;
 }
+
+void PhoneEntry::print(PhoneEntry *head)
+{
+    PhoneEntry *temp = head;
+    while (head)
+    {
+        head->print_entry();
+        cout << "ay 7aga ";
+        temp = head;
+        head = head->next;
+    }
+}

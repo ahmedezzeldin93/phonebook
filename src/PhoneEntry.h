@@ -40,6 +40,7 @@ public:
 	void setSurname(const string& surname);
 	string getFullname();
 	void print_entry();
+	void print(PhoneEntry *head);
 
 	friend class PhoneBook;
 	friend class Iterator;
